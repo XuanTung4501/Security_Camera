@@ -9,13 +9,13 @@ from Utils import *
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--video_path', default="people.mp4")
+parser.add_argument('--video_path', default="../videos/people.mp4")
 args = parser.parse_args()
 
 pTime = 0
 cap = cv2.VideoCapture(args.video_path)  # For Video
 
-model = YOLO("./models/best.pt")
+model = YOLO("../models/best.pt")
 
 classNames = ['person']
 
@@ -71,7 +71,7 @@ while True:
 
             if totalCount.count(id) == 0:
                 totalCount.append(id)
-                cv2.imwrite(f"detectedImages/intruder{str(int(id))}.png", crop_img)
+                cv2.imwrite(f"./detected_images/intruder{str(int(id))}.png", crop_img)
 
     cTime = time.time()
     fps = 1 / (cTime - pTime)
@@ -79,7 +79,11 @@ while True:
 
     showDateTime(img, (800, 45))
     cv2.putText(img, f'FPS: {str(int(fps))}', (25, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 200, 0), 2)
+    cv2.putText(img, f'Press Q to Quit', (400, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 200, 0), 2)
 
     cv2.imshow("Image", img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+cap.release()
+cv2.destroyAllWindows()
