@@ -21,4 +21,4 @@ cd using_SVM/
 python main.py --video_path=link_to_video 
 ```
 ## Result
-![Demo](result/image.jpg)
+![Demo](./result/security_camera.png)
